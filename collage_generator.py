@@ -43,10 +43,11 @@ for link in a_tags:
 
 print(f'Extracted image links: {len(img_urls)}')
 
+rows = 10
 
 counter2 = 0
 curr = 0
-for i in range(210//5, 210 + 210//5, 210//5):
+for i in range(210//rows, 210 + 210//rows, 210//rows):
     images = []
     counter = 0
     for url in img_urls[curr:i]:
@@ -94,13 +95,13 @@ for i in range(210//5, 210 + 210//5, 210//5):
         counter += 1
         
     #collage.show()
-    collage.save(f'collage{i//42}.jpg')
-    print(f'Collaged image {i//42}')
+    collage.save(f'collages/collage{i//(210//rows)}.jpg')
+    print(f'Collaged image {i//(210//rows)}')
     curr = i
 
 collages = []
-for i in range(5):
-    collages.append(Image.open(f'collage{i+1}.jpg'))
+for i in range(rows):
+    collages.append(Image.open(f'collages/collage{i+1}.jpg'))
 
 global_width = max(img.width for img in collages)
 global_height = sum(img.height for img in collages)
@@ -112,5 +113,5 @@ for img in collages:
     full_collage.paste(img, (0,y_offset))
     y_offset += img.height
 
-full_collage.save('full_collage.jpg')
+full_collage.save('collages/full_collage.jpg')
 full_collage.show()
