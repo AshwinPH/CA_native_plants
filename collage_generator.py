@@ -38,7 +38,7 @@ for link in a_tags:
     # img = Image.open(io.BytesIO(response.content))
     # if img.mode != 'RGB':
     #     img = img.convert('RGB')
-    # img.save('images/' + labels[counter] + '.jpg')
+    # img.save('images/' + labels[counter] + '.png')
     # counter += 1
 
 print(f'Extracted image links: {len(img_urls)}')
@@ -51,7 +51,7 @@ for i in range(210//rows, 210 + 210//rows, 210//rows):
     images = []
     counter = 0
     for url in img_urls[curr:i]:
-        img = Image.open('images/' + labels[counter2] +'.jpg')
+        img = Image.open('images/' + labels[counter2] +'.png')
         img.thumbnail((1000,1000))
         images.append(img)
         print(f'image opened: {counter2}')
@@ -79,9 +79,9 @@ for i in range(210//rows, 210 + 210//rows, 210//rows):
 
 
     # Save the collage as a file
-    unlabeled_collage.save('unlabeled_collage.jpg')
+    unlabeled_collage.save('unlabeled_collage.png')
     Image.MAX_IMAGE_PIXELS = None
-    collage = Image.open('unlabeled_collage.jpg')
+    collage = Image.open('unlabeled_collage.png')
     canvas = ImageDraw.Draw(collage)
 
     fontSize = 30
@@ -95,13 +95,13 @@ for i in range(210//rows, 210 + 210//rows, 210//rows):
         counter += 1
         
     #collage.show()
-    collage.save(f'collages/collage{i//(210//rows)}.jpg')
+    collage.save(f'collages/collage{i//(210//rows)}.png')
     print(f'Collaged image {i//(210//rows)}')
     curr = i
 
 collages = []
 for i in range(rows):
-    collages.append(Image.open(f'collages/collage{i+1}.jpg'))
+    collages.append(Image.open(f'collages/collage{i+1}.png'))
 
 global_width = max(img.width for img in collages)
 global_height = sum(img.height for img in collages)
@@ -113,5 +113,5 @@ for img in collages:
     full_collage.paste(img, (0,y_offset))
     y_offset += img.height
 
-full_collage.save('collages/full_collage.jpg')
+full_collage.save('collages/full_collage.png')
 full_collage.show()
